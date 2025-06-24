@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.local
+    ports:
+      - "${PORT_EXPOSED}:${PORT_INTERNAL}"
+    volumes:
+      - ./api/src:/app
+    environment:
+      - HOST=${HOST}
+      - PORT=${PORT_INTERNAL}
+      - PYTHONUNBUFFERED=1
