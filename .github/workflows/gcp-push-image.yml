@@ -32,7 +32,7 @@ jobs:
       - name: Google Auth
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: 'projects/${{ env.PROJECT_ID}}/locations/global/workloadIdentityPools/${{ env.WIP_ID }}/providers/github-provider'
+          workload_identity_provider: 'projects/${{ env.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.WIP_ID }}/providers/github-provider'
           service_account: '${{ env.SERVICE_ACCOUNT_NAME }}@${{ env.PROJECT_ID }}.iam.gserviceaccount.com'
           token_format: 'access_token'
 
