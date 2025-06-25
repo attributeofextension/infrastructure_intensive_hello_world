@@ -30,7 +30,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Google Auth
-        id: auth
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: 'projects/${{ env.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.WIP_ID }}/providers/github-provider'
@@ -40,7 +39,7 @@ jobs:
       - name: Build and Push Image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./api
           file: Dockerfile.prod.gcp
           push: true
           tags: |
