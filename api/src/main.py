@@ -1,3 +1,4 @@
+import os
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import sys
 
@@ -12,8 +13,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
 
 
 def main():
-    host = sys.argv[1] if len(sys.argv) > 1 else '0.0.0.0'
-    port = int(sys.argv[2]) if len(sys.argv) > 2 else 8000
+    host = sys.argv[1] if len(sys.argv) > 1 else os.getenv('HOST','0.0.0.0')
+    port = int(sys.argv[2]) if len(sys.argv) > 2 else os.getenv('PORT',8080)
     print(f"Server starting on {host}:{port}")
 
     server = HTTPServer((host, port), SimpleHandler)
