@@ -1,0 +1,12 @@
+FROM python:3.13-slim
+WORKDIR /app
+COPY ./src .
+# Cloud Run will automatically set PORT environment variable
+# We expose 8080 as it's the standard for Cloud Run
+EXPOSE 8080
+# Set environment variables
+ENV HOST=0.0.0.0
+ENV PORT=8080
+
+# Run the application with unbuffered output
+CMD ["python", "-u", "main.py", "0.0.0.0", "8080"]
