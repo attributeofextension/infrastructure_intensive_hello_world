@@ -16,7 +16,7 @@ env:
   REPOSITORY: hello-world-images
   IMAGE_NAME: hello-world
   WIP_ID: github-actions-pool
-  SERVICE_ACCOUNT_NAME: hello-world-image-pusher
+  SERVICE_ACCOUNT_NAME: helloworld-image-pusher
 
 jobs:
   build-and-push:
