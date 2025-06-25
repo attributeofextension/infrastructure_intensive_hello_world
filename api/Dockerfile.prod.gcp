@@ -6,6 +6,7 @@ COPY ./src .
 EXPOSE 8080
 # Set environment variables
 ENV HOST=0.0.0.0
+ENV PORT=8080
 
 # Run the application with unbuffered output
 CMD ["python", "-u", "main.py"]
