@@ -22,7 +22,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions:
-      contents: 'read'
+      contents: read
       id-token: write
 
     steps:
