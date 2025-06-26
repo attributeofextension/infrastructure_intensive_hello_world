@@ -7,6 +7,7 @@ EXPOSE 8080
 # Set environment variables
 ENV HOST=0.0.0.0
 ENV PORT=8080
+ENV PROVIDER=GCP
 
 # Run the application with unbuffered output
 CMD ["python", "-u", "main.py"]
