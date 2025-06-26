@@ -1,0 +1,45 @@
+name: Deploy Image to GCP Cloud Run
+on:
+  workflow_run:
+    workflows: ["Build and Push Image to GCP"]
+    types:
+      - completed
+
+env:
+  REGISTRY: australia-southeast1-docker.pkg.dev
+  REGION: australia-southeast1
+  PROJECT_ID: eminent-torch-463904-k0
+  PROJECT_NUMBER: 313384425727
+  REPOSITORY: hello-world-images
+  IMAGE_NAME: hello-world
+  WIP_ID: github-actions-pool
+  SERVICE_ACCOUNT_NAME: helloworld-github-deploy
+  CLOUD_RUN_SERVICE_NAME: hello-world
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: 'projects/${{ env.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.WIP_ID }}/providers/github-provider'
+          service_account: '${{ env.SERVICE_ACCOUNT_NAME }}@${{ env.PROJECT_ID }}.iam.gserviceaccount.com'
+          token_format: 'access_token'
+
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.CLOUD_RUN_SERVICE_NAME }}
+          region: ${{ env.REGION }}
+          project_id: ${{ env.PROJECT_ID }}
+          image: ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}:latest
+
+
