@@ -22,8 +22,8 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: read
+      id-token: write
 
     steps:
       - name: Google Auth
