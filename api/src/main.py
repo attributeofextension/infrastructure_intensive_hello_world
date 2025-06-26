@@ -20,9 +20,19 @@ def create_handler(provider: str):
 
 
 def main():
+    provider = os.getenv('PROVIDER', 'unknown')
+    default_port = 8080
+    match provider.lower():
+        case "aws":
+            default_port = 8000
+        case "gcp":
+            default_port = 8080
+        case _:
+            default_port = 8080
+
     host = sys.argv[1] if len(sys.argv) > 1 else os.getenv('HOST','0.0.0.0')
-    port = int(sys.argv[2]) if len(sys.argv) > 2 else int(os.getenv('PORT',8080))
-    provider = os.getenv('PROVIDER','unknown')
+    port = int(sys.argv[2]) if len(sys.argv) > 2 else int(os.getenv('PORT',default_port))
+
     print(f"Server starting on {host}:{port}")
 
     server = HTTPServer((host, port), create_handler(provider))

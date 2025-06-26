@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'api/src/**'
-      - 'Dockerfile.prod.gcp'
+      - 'api/Dockerfile.prod.gcp'
   workflow_dispatch:
 
 env:
