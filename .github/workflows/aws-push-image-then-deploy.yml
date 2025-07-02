@@ -47,6 +47,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: hello-world-3-td-service
+          service: hello-world-3-td-service-2
           cluster: hello-world-cluster-3
           wait-for-service-stability: true
